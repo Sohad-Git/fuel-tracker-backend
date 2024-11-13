@@ -41,4 +41,8 @@ exports.deleteFuelRecord = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 582f6abb7eaf8f332aa8c956428ccac238f09e48
