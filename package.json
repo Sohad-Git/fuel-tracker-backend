@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "build": "rm -rf node_modules && npm install",
+    "preinstall": "rm -rf node_modules package-lock.json",
     "start": "node server.js"
     
   },
