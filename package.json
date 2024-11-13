@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "postinstall": "rm -rf node_modules && npm install",
     "start": "node server.js"
+    
   },
   "dependencies": {
   "express": "^4.18.2",
