@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const fuelRecordSchema = new mongoose.Schema({
   carName: { type: String, required: true },
+  user: { type: String, required: true },
   date: { type: Date, required: true },
   fuelType: { type: String, required: true },
   odometer: Number,
