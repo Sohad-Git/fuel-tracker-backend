@@ -1,15 +1,18 @@
 const FuelRecord = require('../models/FuelRecord');
 
+// Update an existing fuel record by ID
 exports.updateFuelRecord = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const updatedRecord = await FuelRecord.findByIdAndUpdate(id, req.body, { new: true });
-      res.status(200).json(updatedRecord);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
-  exports.addFuelRecord = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedRecord = await FuelRecord.findByIdAndUpdate(id, req.body, { new: true });
+    res.status(200).json(updatedRecord);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Add a new fuel record
+exports.addFuelRecord = async (req, res) => {
   try {
     const record = new FuelRecord(req.body);
     await record.save();
@@ -19,6 +22,7 @@ exports.updateFuelRecord = async (req, res) => {
   }
 };
 
+// Get all fuel records for a specific car
 exports.getFuelRecords = async (req, res) => {
   try {
     const { carName } = req.params;
@@ -28,6 +32,8 @@ exports.getFuelRecords = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Delete a fuel record by ID
 exports.deleteFuelRecord = async (req, res) => {
   try {
     const { id } = req.params;
@@ -41,8 +47,4 @@ exports.deleteFuelRecord = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 582f6abb7eaf8f332aa8c956428ccac238f09e48
