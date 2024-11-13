@@ -10,11 +10,12 @@ dotenv.config();
 const app = express();
 app.use(cors({
   origin: [
-    'http://localhost:3000', // For local development
-    'https://sohad-git.github.io/React_Fuel_Report.io/' // For GitHub Pages
+    'http://localhost:3000',
+    'https://sohad-git.github.io/React_Fuel_Report.io/'
   ],
   credentials: true
 }));
+
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
