@@ -3,7 +3,7 @@ const { addFuelRecord, getFuelRecords, updateFuelRecord, deleteFuelRecord } = re
 const router = express.Router();
 
 router.post('/', addFuelRecord);
-router.get('/:carName', getFuelRecords);
+router.get('/:user/:carName', getFuelRecords); // Get fuel records by user and carName
 router.put('/:id', updateFuelRecord);
 router.delete('/:id', deleteFuelRecord);
 
