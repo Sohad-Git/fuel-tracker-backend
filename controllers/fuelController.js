@@ -28,3 +28,17 @@ exports.getFuelRecords = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+exports.deleteFuelRecord = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedRecord = await FuelRecord.findByIdAndDelete(id);
+
+    if (!deletedRecord) {
+      return res.status(404).json({ error: 'Fuel record not found' });
+    }
+
+    res.status(200).json({ message: 'Fuel record deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
