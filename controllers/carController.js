@@ -1,7 +1,7 @@
 const Car = require('../models/Car');
 
 // Controller to add a new car
-exports.addCar = async (req, res) => {
+const addCar = async (req, res) => {
   try {
     const { carName, carModel, carYear, user } = req.body;
 
@@ -22,7 +22,7 @@ exports.addCar = async (req, res) => {
 };
 
 // Controller to get cars associated with a specific user
-exports.getCars = async (req, res) => {
+const getCars = async (req, res) => {
   try {
     const { user } = req.params;
     if (!user) {
@@ -39,7 +39,7 @@ exports.getCars = async (req, res) => {
 };
 
 // Controller to delete a car by ID
-exports.deleteCar = async (req, res) => {
+const deleteCar = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -52,4 +52,19 @@ exports.deleteCar = async (req, res) => {
 
     // If no car is found with the given ID
     if (!deletedCar) {
-      return res.status(404).json({ error: 'Car not 
+      return res.status(404).json({ error: 'Car not found' });
+    }
+
+    res.status(200).json({ message: 'Car deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting car:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Correctly exporting all controllers
+module.exports = {
+  addCar,
+  getCars,
+  deleteCar,
+};
