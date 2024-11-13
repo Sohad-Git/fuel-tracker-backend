@@ -1,36 +1,33 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
+const mongoose = require('mongoose');
 const carRoutes = require('./routes/carRoutes');
 const fuelRoutes = require('./routes/fuelRoutes');
-
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://sohad-git.github.io/React_Fuel_Report.io/'
-  ],
-  credentials: true
-}));
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-
-const PORT = process.env.PORT || 5000;
 
 // Routes
 app.use('/api/cars', carRoutes);
 app.use('/api/fuel', fuelRoutes);
 
-// Connect to MongoDB and start server
+app.get('/', (req, res) => {
+  res.send('Server is running');
+});
 
-const mongoose = require('mongoose');
-require('dotenv').config();
+mongoose.set('strictQuery', false);
 
-mongoose.set('strictQuery', true);
-
-
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error.message);
+    process.exit(1);
+  });
